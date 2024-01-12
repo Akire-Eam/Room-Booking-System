@@ -1,0 +1,31 @@
+
+
+<table id='user-table' class="table" style="width: 90vw;">
+  <thead style="height: 60px;">
+      <tr class="text-center">
+        <th scope="col" style="font-weight: normal;">No.</th>
+        <th scope="col" style="font-weight: normal;">Username</th>
+        <th scope="col" style="font-weight: normal;">Name</th>
+        <th scope="col" style="font-weight: normal;">Email</th>
+        <th scope="col" style="font-weight: normal;">Role</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>      
+      {% for u in users %}
+      <tr class="text-center">
+        <th scope="row">{{users.start_index|add:forloop.counter0 }}</th>
+        <td>{{u.username}}</td>
+        <td>{{u.get_full_name}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.get_user_type_display}}</td>
+        <td>
+            <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-1" id="editUser" data-form-url="{% url 'editUser' u.id %}"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button type="button" class="pass bs-modal btn btn-sm btn-secondary btn-sm mr-1" id="changePass" data-form-url="{% url 'changePass' u.id %}">{% if u.isGoogle %}  <i class="fa fa-google"></i> {% else %}<i class="fa-solid fa-key"></i>{% endif %}</button>
+            <button type="button" class="delete bs-modal btn btn-sm btn-danger btn-sm" id="deleteUser" data-form-url="{% url 'deleteUser' u.id %}"><i class="fa-regular fa-trash-can"></i> </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+ 

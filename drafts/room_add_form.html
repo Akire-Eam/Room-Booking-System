@@ -1,0 +1,10 @@
+{% extends 'admin/add_form.html' %}
+
+{% block object-tools %}
+{{ block.super }}
+{% if has_add_permission %}
+<div class="submit-row">
+  <a href="{% url 'upload-rooms' %}" class="button" style="margin-top: 10px;">Upload Rooms</a>
+</div>
+{% endif %}
+{% endblock %}

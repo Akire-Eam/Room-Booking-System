@@ -1,0 +1,83 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ 'Import Rooms from CSV File' }}</h1>
+                <form method="post" enctype="multipart/form-data">
+                    CSV File:
+                    {% csrf_token %}
+                    {{ form.csv_file }}
+                    <button class="button" type="submit">{% trans 'Import' %}</button>
+                    <button class="button" onclick="window.location.href='{% url 'admin:UPM_room_changelist' %}';">{% trans 'Cancel' %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="row"><br></div>
+        <div class="row"><h2>Sample CSV Content:</h2></div>
+        <div class="row">Room Name,Room Type,Capacity,College,Building</div>
+        <div class="row">CAMP Audio Visual Room,Auditorium,60,College of Allied Medical Professions,College of Allied Medical Professions</div>
+        <div class="row">GAB 101,LR,25,CAS,GAB</div>
+        <div class="row"><h2>Notes:</h2></div>
+        <li>Headers and fields Room Name, Room Type, Capacity, College, and Building must be included.</li>
+        <li>For fields with commas (like room names with commas), enclose it with double quotation marks.</li>
+        <li>You can use the IDs for room type, college, and building in place of their full names.</li>
+        <li>You can also use the shortened codes below in place of their full names.</li>
+        <table>
+            <tr>
+                <th>You can use the following codes for the ROOM TYPE field:</th>
+                <th>You can use the following codes for the COLLEGE field:</th>
+                <th>You can use the following codes for the BUILDING field:</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>Room Type Name</th>
+                        </tr>
+                        {% for code, name in room_type_codes.items %}
+                            <tr>
+                                <td>{{ code }}</td>
+                                <td>{{ name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>College Name</th>
+                        </tr>
+                        {% for code, name in college_codes.items %}
+                            <tr>
+                                <td>{{ code }}</td>
+                                <td>{{ name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>Building Name</th>
+                        </tr>
+                        {% for code, name in building_codes.items %}
+                            <tr>
+                                <td>{{ code }}</td>
+                                <td>{{ name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,717 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock title  %}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- scripts and css -->
+        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}">
+        <link rel="icon" href="{% static "Logo-nav2.png" %}">
+        {% include 'css_modules.html' %}
+
+        <style>
+            /* Add styles for the login popup */
+            body {
+                font-family: 'Albert Sans';
+                font-weight: 400;
+                margin: 0;
+                max-width: 100vw; /* Set the maximum width to the width of the viewport */
+                min-width: 0;
+                font-size: 100%;
+                scrollbar-width: thin;
+                scrollbar-color: #888888 #480d0b;
+            }
+
+            .wrapper {
+                display: flex;
+                flex-direction: column;
+                height: 100vh; /* Ensure the wrapper takes the full viewport height */
+                max-width: 100vw; /* Make the wrapper take the full width */
+                overflow-y: hidden; /* Hide horizontal overflow */
+            }
+
+            .login-popup {
+                position: fixed;
+                top: 20%; /* Center the popup vertically */
+                left: 30%; /* Center the popup horizontally */
+                bottom: 20%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                height: 250px;
+                border: 1px solid #ccc;
+                z-index: 1000; /* Ensure the popup is on top */
+            }
+
+            /* Close button style */
+            .login-popup .close {
+                position: absolute;
+                top: -15px; /* Adjust this value to position it properly */
+                left: -15px; /* Adjust this value to position it properly */
+                font-size: 1.5rem; /* Adjust the size of the close button */
+                background: transparent;
+                border: none;
+                background-color: white;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            #userprofile{
+                background-color: #480d0b!important;
+                color: rgb(255, 255, 255);
+                /* font-family: Helvetica, sans-serif; */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            #supermenu{
+                background-color: #480d0b !important;
+                color: black !important;
+                /* font-family: Helvetica, sans-serif; */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                width: 250px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            #roommenu{
+                background-color: #480d0b !important;
+                color: black !important;
+                /* font-family: Helvetica, sans-serif; */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                width: 250px;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .dropdown-item2{
+                display: block;
+                width: 100%;
+                clear: both;
+                font-weight: 400;
+                color: #fff;
+                text-align: left;
+                white-space: nowrap;
+                background-color: transparent;
+                border: 0;
+            
+            }
+
+            #passwordButton, #logoutButton  {
+            background-color: #6A6F4C;
+            transition: background-color 0.3s;
+            border-radius: 5px; 
+            text-align: center; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 70%;
+            font-family: 'Albert Sans';
+            font-size: small;
+            margin-top: 5px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #passwordButton:hover, #logoutButton:hover{
+            background-color:#806044;
+            color: white;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;       
+        }
+
+
+        /* Hidden class to hide the popup initially */
+        .hidden {
+            display: none;
+        }
+
+        .link_label{
+            padding: 5px;
+        }
+
+        .fa-circle-user {
+            font-size: 30px; /* Change this value to adjust the size */
+            }
+        
+            /* Default size for both the user text and the icon */
+        .user-info {
+            display: flex;
+            align-items: flex-start;
+            padding: 5px 10px;
+            background-color: #6A6F4C;
+            border-radius: 30px;
+            font-size: 1rem;/* Adjust this value for the text size */
+        }
+
+        .navbar {
+            padding: 10px 15px;
+            background: #480d0b;
+            border-bottom: 10px solid #480d0b;
+            color: #fff;
+            min-height: 80px;
+            max-height: 80px;
+            }
+
+        @media(max-width: 1052px) {
+            .adminheader{
+                font-size: 14px;
+            }
+
+            .user-info {
+                font-size: 1rem; /* Smaller text size */
+            }
+
+            .fa-circle-user {
+                font-size: 25px; /* Smaller icon size */
+            }
+        }
+
+        /* CSS for large screens */
+.custom-navbar .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.custom-navbar .navbar-toggler {
+    display: none;
+}
+
+.custom-navbar .nav-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.custom-navbar .navbar-nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.custom-navbar .navbar-nav li {
+    margin: 0;
+    padding: 0 10px;
+}
+
+.navbar-expand-lg .navbar-nav .user-info .dropdown-menu {
+        margin-left: -170px !important;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        opacity: 100% !important;
+        margin-left: -35px !important;
+    }
+
+@media (min-width: 1290px) {
+    .nav-collapse{
+        display: flex !important;
+    }
+}
+/* CSS for medium screens */
+@media (max-width: 1290px) {
+
+
+    button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+    cursor: pointer;
+}
+
+    .custom-navbar .navbar-toggler {
+        display: block;
+    }
+
+    .custom-navbar .collapse.nav-collapse {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #480d0b;
+        z-index: 999;
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .custom-navbar .collapse.nav-collapse.show {
+        display: flex;
+    }
+
+    .custom-navbar .navbar-nav {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    /* .custom-navbar .navbar-nav li {
+        margin: 10px 0; 
+        padding: 0;
+    } */
+
+    .custom-navbar .navbar-nav ul li {
+        padding: 5px;
+    }
+
+    .custom-navbar .navbar-nav .user-info {
+        display: flex;
+        /* width: 100%; */
+    }
+
+    /* .custom-navbar .navbar-nav .user-info .user {
+        display: flex;
+        margin: 10px 0;
+    } */
+
+    .custom-navbar .navbar-nav .user-info .dropdown-menu li {
+        padding: 5px;
+        border-radius: 20px;
+        margin-bottom: 5px;
+    }
+
+    .custom-navbar .navbar-nav .user-info .dropdown-menu li:first-child {
+        font-size: 30px;
+        font-style: italic;
+        margin-bottom: 10px;
+    }
+
+    .custom-navbar .navbar-nav .user-info .dropdown-menu li:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Target the dropdown menu with custom scrollbar styles */
+    /* .navbar-expand-lg .navbar-nav .user-info .dropdown-menu {
+        margin-left: -125px !important;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #888888 #480d0b; 
+    } */
+
+    /* Define the scrollbar track */
+    .navbar-expand-lg .navbar-nav .user-info .dropdown-menu::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+        background-color: #480d0b; 
+    }
+
+    /* Define the scrollbar thumb */
+    .navbar-expand-lg .navbar-nav .user-info .dropdown-menu::-webkit-scrollbar-thumb {
+        background-color: #888888; /* Color of the thumb */
+        border-radius: 10px; /* Radius of the thumb */
+    }
+
+    /* Define the scrollbar thumb for Firefox */
+    .navbar-expand-lg .navbar-nav .user-info .dropdown-menu {
+        scrollbar-width: thin;
+        scrollbar-color: #888888 #480d0b; /* Scrollbar color */
+    }
+
+}
+
+/* ... previous CSS remains unchanged ... */
+
+/* CSS for medium screens */
+@media (max-width: 768px) {
+    /* ... previous media query styles ... */
+
+    .navbar-expand-lg .navbar-nav .user-info .dropdown-menu {
+        float: none;
+        margin: 0;
+        margin-top: 40px !important;
+        box-shadow: none;
+        margin-left: -160px !important;
+        overflow: auto;
+    }
+
+    #userprofile {
+        padding: 5px;
+        padding-bottom: 10px;
+    }
+
+    .custom-navbar .collapse.nav-collapse .dropdown-menu > li {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
+
+    .custom-navbar .collapse.nav-collapse .dropdown-menu > li:first-child {
+        font-size: initial;
+        font-style: normal;
+        margin-bottom: 10px;
+    }
+
+    .navbar-expand-lg .navbar-nav .dropdown-menu {
+        position: absolute !important;
+        opacity: 100% !important;
+        margin-left: -25px !important;
+        margin-top: 3px !important;
+    }
+
+    .navbar-expand-lg .navbar-nav #roommenu {
+        position: absolute !important;
+        opacity: 100% !important;
+        margin-left: -90px !important;
+        margin-top: 3px !important;
+    }
+}
+
+.dropdown-menu {
+    border-top: 0px solid #480d0b !important;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+#content {
+    flex: 1; /* Allow content to grow within the wrapper */
+    overflow: hidden; /* Hide horizontal overflow */
+    max-width: 100vw;
+    background-color: #f5ece1 !important;
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #480d0b;
+}
+
+#content::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+        background-color: #480d0b; 
+    }
+
+    /* Define the scrollbar thumb */
+    #content::-webkit-scrollbar-thumb {
+        background-color: #888888; /* Color of the thumb */
+        border-radius: 10px; /* Radius of the thumb */
+    }
+
+a{
+    font-size: 1rem;
+}
+
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    margin-bottom: 50px;
+}
+
+
+        </style>
+
+        {% block extracss %}
+        {% endblock extracss %}
+    </head>
+    <body>
+
+        <div class="wrapper d-flex align-items-stretch" style="height: 100%;" id="wrapperDivMain" style="z-index: 1;">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid custom-navbar" style="margin-top: 2px; font-weight: 500;">
+                    <a href="{% url 'indexPage' %}" class="logo mr-3"><img src="{% static "Logo_Navbar.png" %}" style="height: 60px; width: 60px;"></a>
+                    <button class=".custom-navbar navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fas fa-bars" style="color: white"></span>
+                    </button>
+                    <div class=" .custom-navbar collapse nav-collapse" id="navbarSupportedContent" style="display: none; color: #f5ece1; font-size: large;">
+                        <!-- <ul class="nav navbar-nav list-unstyled components">
+                            <li class="mr-3">
+                                <a href="{% url 'about' %}"><i class="fa-solid fa-circle-info mr-2"></i><span class="link_label">About ORBS</span></a>
+                            </li>
+                        </ul> -->
+
+                        <ul class=".custom-navbar nav navbar-nav">
+                            <ul class="list-unstyled components">
+                                {% if request.user.is_authenticated %}
+                                    <li>
+                                            <a class='sub' href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-2">Bookings <span class="badge badge-light" style="padding: 0.5vw 0.5vw; font-weight: bolder; color: #E9E3D3; background-color: red;">{{booking_notif}}</span></span></a>
+                                        
+                                        {% if request.user.can_upload_schedules and not request.user.is_superuser %}
+                                            <a class='sub ms-4' href="{% url 'uploadPage' %}"><i class="sub fa-solid fa-download"></i><span class="link_label ms-2">Upload</span></a>
+                                            <a class='sub ms-4' href="{% url 'uploadedcsvpage' %}"><i class="sub fa-solid fa-file"></i><span class="link_label ms-2">View CSV</span></a>
+                                        {% endif %}
+
+                                        
+                                        {% if request.user.is_superuser %}
+                                            <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i><span class="link_label ms-2">Colleges </span></a>
+                                        {% endif %}
+                                        
+
+                                        {% if request.user.can_manage_facilities and not request.user.is_superuser %}
+                                            <a class='sub ms-4' href="{% url 'adminCollegeView' request.user.college.slug %}"><i class="sub fa-solid fa-school"></i><span class="link_label ms-2">College</span></a>
+                                        {% endif %}
+
+                                        {% if request.user.can_approve or request.user.is_superuser  %}
+                                        <a class='sub ms-4' href="{% url 'exportBooking' %}"><i class="sub fa-solid fa-upload"></i><span class="link_label ms-2">Export</span></a>
+
+                                        {% endif %}
+                                        {% if request.user.can_manage_equipment %}
+                                        <div class="dropdown ms-3" style="display: inline-block; font-weight: 500;">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="roomsmenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #480d0b; margin-right: 0.5vw; border: none; font-size: 1rem;">
+                                                <i class="sub fa-solid fa-door-closed"></i> <span class="link_label ms-2">ROOMS</span>
+                                            </button>
+                                            <ul class="dropdown-menu" id="roommenu" aria-labelledby="roomsmenu" style="margin-top: 10px;">
+                                                <li><a class="dropdown-item" href="{% url 'roomView' %}"><i class="sub fa fa-door-open"></i><span class="link_label ms-2">View Rooms</span></a></li>
+                                                <li><a class="dropdown-item" href="{% url 'manageRooms' %}"><i class="sub fa fa-users"></i><span class="link_label ms-2">Manage Rooms</span></a></li>
+                                            </ul>
+                                        </div>
+                                        {% else %}
+                                        <a class='sub ms-4' href="{% url 'roomView' %}"><i class="sub fa-solid fa-door-closed"></i> <span class="link_label ms-2">View Rooms</span></a>
+                                        {% endif %}
+                                        {% if request.user.is_superuser %}
+                                        <div class="dropdown ms-3" style="display: inline-block; font-weight: 500;">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="superuserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #480d0b; margin-right: 0.5vw; border: none; font-size: 1rem;">
+                                                <i class="sub fa fa-cog"></i> <span class="link_label ms-2">SUPERUSER MENU</span>
+                                            </button>
+                                            <ul class="dropdown-menu" id="supermenu" aria-labelledby="superuserMenu" style="margin-top: 10px;">
+                                                <li><a class="dropdown-item" href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Terms</span></a></li>
+                                                <li><a class="dropdown-item" href="{% url 'manageUsers' %}"><i class="sub fa fa-users"></i><span class="link_label ms-2">Users</span></a></li>
+                                                <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="sub fa-solid fa-code"></i><span class="link_label ms-2">Admin</span></a></li>
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+
+                                    </li>
+                                {% else %} <!--Guest-->
+                                <li>
+                                    <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i><span class="link_label ms-2">Colleges</span></a>
+                                    <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label ms-1">View Rooms</span></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            {% if request.user.is_authenticated %}
+                            <div class="custom-navbar user-info">
+                                <span class="user mt-0 ml-2" id="navbarDropdownControl1" role="button">
+                                    Logged in as
+                                    <div>
+                                        <span style="text-transform: uppercase; font-weight: 800;">{{ request.user }}</span>   
+                                    </div>
+                                </span>
+                                <li class="user nav-item dropdown me-3 pe-3">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdownControl2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-circle-user mr-2"></i>
+                                    </a>                            
+                                    <!--User Profile-->
+                                    <ul class="dropdown-menu" id="userprofile" aria-labelledby="navbarDropdown" style="margin-top: 1.8em; margin-right: 5em;">
+                                        <li><strong style="text-transform:uppercase; font-size: 2rem; font-style: italic;">{{request.user}}</strong></li>
+                                        <li>{{request.user.email}}</li>
+                                        <br>
+                                        <div class="pl-3"style="text-align:left">
+                                        <strong>User Type:</strong>
+                                        
+                                            {% if user.user_type != None %}
+                                            {{user.get_user_type_display}}
+                                            {% else %}
+                                            Administrator
+                                            {% endif %}
+                                        <br>
+                                        <strong>Name:</strong>
+                                        {{request.user.get_full_name}}
+                                        <br>
+                                        <strong>College:</strong>
+                                        {{request.user.college}}
+                                        <br>
+                                        <strong>Department:</strong> 
+                                        {{request.user.department}}
+                                        </div>
+                                    <br>
+                                    <a class="dropdown-item2 pb-2 pt-2" href="{% url 'profile' %}" id="passwordButton"><i class="fa-solid fa-key"></i>&nbsp;Change Password</a>
+                                    <a class="dropdown-item2 pb-2 pt-2" href="{% url 'logout' %}" id="logoutButton"><i class="fa-sharp fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a>
+                                    </ul>
+                                </li>
+                            </div>
+                            {% else %}
+                            <div>
+                            <span id="guest_login" class="mt-2 ml-5" id="navbarDropdownControl1" role="button">Welcome, <span style="text-transform: uppercase; font-weight: bold;">GUEST &nbsp;&nbsp;|&nbsp;  </span></span>
+                                <a class='text-secondary mt-2 ms-2 me-3 pe-3' href="{% url 'loginPage' %}" id="navbarDropdown">
+                                   <strong style="color: #E9E3D3">Log In</strong>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content" class="bg-body" style="padding: 2rem; padding-top: 80px;">
+                {% include 'message.html' %}
+
+                <main>
+                    <div class="app-title">
+                        {% block breadcrumb %}
+                        {% endblock breadcrumb %}
+                    </div>
+                    {% block content %}
+                    {% endblock content %}
+                </main>
+
+            </div>
+		</div>
+        {% include 'script_modules.html' %}
+
+        {% block extrascripts %}
+        {% endblock extrascripts %}
+        <script>
+            $(document).ready(function() {
+                $('.msg').fadeIn();
+                setTimeout(function() {
+                    $(".msg").fadeOut();
+                  }, 5000);
+                var customDropdownMenu = null;
+                var isDropdownOpen = false;
+
+                function positionCustomDropdown() {
+                    if (customDropdownMenu && isDropdownOpen) {
+                        var buttonCoords = $("#superuserMenu").offset();
+                        var buttonWidth = $("#superuserMenu").outerWidth();
+                        var buttonHeight = $("#superuserMenu").outerHeight();
+
+                        // Calculate the left position
+                        var leftPosition = buttonCoords.left + buttonWidth - customDropdownMenu.outerWidth();
+                        if (leftPosition < 0) {
+                            leftPosition = 0; // Ensure the dropdown doesn't go off the left edge
+                        }
+
+                        // Calculate the top position
+                        var topPosition = buttonCoords.top + buttonHeight;
+
+                        customDropdownMenu.css("position", "absolute");
+                        customDropdownMenu.css("top", topPosition);
+                        customDropdownMenu.css("left", leftPosition);
+                    }
+                }
+
+                // Add an event listener for scrolling to reposition the dropdown
+                $(window).scroll(function () {
+                    positionCustomDropdown();
+                });
+
+
+                function createCustomDropdown() {
+                    if (!customDropdownMenu) {
+                        customDropdownMenu = $("<div class='dropdown-menu custom-dropdown-menu' aria-labelledby='superuserMenu'></div>");
+                        // Add your links here
+                        {% if request.user.can_manage_terms %}
+                            customDropdownMenu.append("<a class='dropdown-item' href='{% url 'manageTerm' %}'><i class='sub fa fa-calendar'></i><span class='link_label ms-2'>Terms</span></a>");
+                        {% endif %}
+                        customDropdownMenu.append("<a class='dropdown-item' href='{% url 'manageUsers' %}'><i class='sub fa fa-users'></i><span class='link_label ms-2'>Users</span></a>");
+                        customDropdownMenu.append("<a class='dropdown-item' href='{% url 'admin:index' %}'><i class='sub fa-solid fa-code'></i><span class='link_label ms-2'>Admin</span></a>");
+                        $("body").append(customDropdownMenu);
+                    }
+                }
+
+                $("#superuserMenu").on("click", function(e) {
+                    $("#userprofile").hide();
+                    $("#roommenu").hide();
+                    e.stopPropagation(); // Stop the event from propagating to the document
+                    $("#supermenu").toggle();
+                    // createCustomDropdown();
+                    isDropdownOpen = !isDropdownOpen;
+                    if (isDropdownOpen) {
+                        customDropdownMenu.show();
+                    } else {
+                        customDropdownMenu.hide();
+                    }
+                    positionCustomDropdown();
+                });
+
+                // Hide the custom dropdown when clicking anywhere else on the page
+                $(document).click(function() {
+                    if (customDropdownMenu && isDropdownOpen) {
+                        customDropdownMenu.hide();
+                        isDropdownOpen = false;
+                    }
+                });
+
+                // Re-position the custom dropdown when the window is resized
+                $(window).on("resize", function() {
+                    positionCustomDropdown();
+                });
+
+                $("#navbarDropdownControl1").click(function(e) {
+                    e.stopPropagation(); // stop the event from propagating to the document
+                    $("#userprofile").toggle();
+                    $("#roommenu").hide();
+                    if (isDropdownOpen) {
+                        $("#supermenu").hide();
+                        isDropdownOpen = false;
+                    }
+                });
+                $("#navbarDropdownControl2").click(function(e) {
+                    e.stopPropagation(); // stop the event from propagating to the document
+                    $("#userprofile").toggle();
+                    $("#roommenu").hide();
+                    if (isDropdownOpen) {
+                        $("#supermenu").hide();
+                        isDropdownOpen = false;
+                    }
+                });
+
+                $("#roomsmenu").click(function(e) {
+                    e.stopPropagation(); // stop the event from propagating to the document
+                    $("#roommenu").toggle();
+                    $("#userprofile").hide();
+                    if (isDropdownOpen) {
+                        $("#supermenu").hide();
+                        isDropdownOpen = false;
+                    }
+                });
+
+
+                // Hide the userprofile when clicking anywhere else on the page
+                $(document).click(function() {
+                    $("#roommenu").hide();
+                    $("#userprofile").hide();
+                    if (isDropdownOpen) {
+                        $("#supermenu").hide();
+                        isDropdownOpen = false;
+                    }
+                });
+
+                $("#guest_login").click(function(){
+                    window.location.href = "{% url 'loginPage' %}";
+                });
+
+                $("#logout_button").click(function() {
+                    console.log("Logging out")
+                    sessionStorage.clear()
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var navbarToggler = document.querySelector('.navbar-toggler');
+                var navbarCollapse = document.querySelector('.nav-collapse');
+
+                function toggleNavbarCollapse() {
+                    if (navbarCollapse.style.display === 'flex') {
+                        navbarCollapse.style.display = 'none';
+                    } else {
+                        navbarCollapse.style.display = 'flex';
+                    }
+                }
+
+                if (navbarToggler && navbarCollapse) {
+                    var observer = new MutationObserver(function () {
+                        var isTogglerHidden = window.getComputedStyle(navbarToggler).display === 'none';
+
+                        if (isTogglerHidden) {
+                            navbarCollapse.style.display = 'flex';
+                        } else {
+                            navbarToggler.addEventListener('click', toggleNavbarCollapse);
+                        }
+                    });
+
+                    observer.observe(navbarToggler, { attributes: true });
+
+                    navbarToggler.addEventListener('click', toggleNavbarCollapse);
+                }
+            });
+
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+
+<style>
+    .description {
+        color: gray;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .question {
+        font-weight: bold;
+        color: #480d0b;
+
+        border-bottom: 0.5px solid #480d0b;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .answer {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 3vh;
+    }
+
+    .footer {
+        text-align: right;
+        border-top: 2px solid #8E1537;
+        padding-top: 5px;
+        margin-top: 50px;
+    }
+</style>
+{% endblock extracss %}
+
+{% block content %}
+<div class = "container-lg px-4 pb-2">
+    <h2 class="py-4" style="font-weight: bolder; margin-top: -5vh;">FAILED LOGIN: UP mail not recognized.</h2>
+    <div class="content" style="margin-top: -2vh">
+        <h5 class="question"><i class="fas fa-mail-bulk"></i> Please Contact the Admin if you need an Account: </h5>
+        <div class="row">
+            <div style="margin-left: 5vw; margin-top: 2vh">
+                <div class="form-group col-md-10">
+                    <i class="fa-2xl fa fa-user-circle" style="display:inline-block"></i> <p style="display:inline-block">Perl Gasmen</p>
+                    <i class="fa-2xl fa fa-envelope" style="display:inline-block; margin-left: 3vw;"></i> <p style="display:inline-block">pegasmen@up.edu.ph</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="margin-top: -2vh">
+        <h5 class="question"><i class="	fa fa-pencil-square"></i> Alternatively, you can fill out and submit this form: </h5>
+        <div style="margin-left: 5vw; margin-top: 2vh">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                  <div class="col-md-3">
+                    {{ form.first_name | as_crispy_field }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form.middle_name | as_crispy_field }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form.last_name | as_crispy_field }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form.email_address | as_crispy_field }}
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-4">
+                    {{ form.user_type | as_crispy_field }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ form.college | as_crispy_field }}
+                  </div>
+                  <div class="col-md-4">
+                      <div id="CAMP-div" style="display: none">
+                          {{ form.dp_CAMP | as_crispy_field }}
+                      </div>
+                      <div id="CAS-div" style="display: none">
+                          {{ form.dp_CAS | as_crispy_field }}
+                      </div>
+                      <div id="CD-div" style="display: none">
+                          {{ form.dp_CD | as_crispy_field }}
+                      </div>
+                      {% comment %}
+                      <div id="CN-div" style="display: none">
+                          {{ form.dp_CN | as_crispy_field }}
+                      </div>
+                      {% endcomment %}
+                      <div id="CP-div" style="display: none">
+                          {{ form.dp_CP | as_crispy_field }}
+                      </div>
+                      <div id="CPH-div" style="display: none">
+                          {{ form.dp_CPH | as_crispy_field }}
+                      </div>
+                      <div id="CM-div" style="display: none">
+                          {{ form.dp_CM | as_crispy_field }}
+                      </div>
+                      <div id="others-div" style="display: none">
+                          {{ form.others | as_crispy_field }}
+                      </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-11 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    hide_department_divs()
+    if ($("#id_college").val()){
+        var col = $("#id_college").val()
+        activate_department_div(col)
+    }
+    function clear_departments(){
+        $("#id_dp_CAMP").val("")
+        $("#id_dp_CAS").val("")
+        $("#id_dp_CD").val("")
+        // $("#id_dp_CN").val("")
+        $("#id_dp_CP").val("")
+        $("#id_dp_CPH").val("")
+        $("#id_dp_CM").val("")
+        $("#id_others").val("")
+    }
+    function hide_department_divs(){
+        $("#CAMP-div").hide()
+        $("#CAS-div").hide()
+        $("#CD-div").hide()
+        // $("#CN-div").hide()
+        $("#CP-div").hide()
+        $("#CPH-div").hide()
+        $("#CM-div").hide()
+        $("#others-div").hide()
+    }
+    function activate_department_div(id){
+        var role = $("#id_user_type").val()
+        console.log(role)
+        if (!(role === "1" || role === "2")){
+            console.log("Not faculty or staff")
+            return;
+        }
+        if (id !== ""){
+            switch(id){
+                case "1":
+                    $("#CAMP-div").show()
+                    break;
+                case "2":
+                    $("#CAS-div").show()
+                    break;
+                case "4":
+                    $("#CD-div").show()
+                    break;
+                // case "5":
+                //    $("#CN-div").show()
+                //    break;
+                case "6":
+                    $("#CP-div").show()
+                    break;
+                case "10":
+                    $("#CPH-div").show()
+                    break;
+                case "11":
+                    $("#CM-div").show()
+                    break;
+                case "17":
+                    $("#others-div").show()
+                    break;
+                default:
+                    hide_department_divs()
+                    break;
+            }
+        }
+    }
+    $("#id_college").change(function(){
+        var col = $("#id_college").val()
+        clear_departments()
+        hide_department_divs()
+        activate_department_div(col)
+    })
+
+    $("#id_user_type").change(function(){
+        var col = $("#id_college").val()
+        clear_departments()
+        hide_department_divs()
+        activate_department_div(col)
+    })
+})
+</script>
+{% endblock extrascripts %}

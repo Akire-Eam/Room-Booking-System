@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block title %}Add User{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+    #f{
+        display: none;
+    }
+    #college{
+        display: none;
+    }
+    #dept{
+        display: none;
+    }
+
+    h2{
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.5em;
+      color: #412F26;
+      text-transform: uppercase;
+      font-weight: bolder;
+      margin-bottom: -25px;
+      text-align: center;  
+  }
+
+  .main-title {
+    text-align: center; 
+    font-size: 6vw; 
+}
+  
+  .container {
+    /* text-align: center;   */
+    justify-content: center;
+  }
+
+  .book-content{
+    background-color: white;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+  }
+
+  .btn-success{
+    background-color: #6A6F4C;
+  }
+
+  .btn-success:hover{
+    background-color: #806044;
+    border-color: #806044;;
+  }
+
+  .min-width-col {
+        min-width: 250px; /* Adjust this value as needed */
+        /* max-width: max-content; */
+}
+
+form{
+    font-family: Helvetica, sans-serif;
+}
+
+.main-title {
+    text-align: center; 
+    font-size: 6vw; 
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 100px;
+    color: #412F26;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin-bottom: -15px;
+}
+</style>
+{% endblock extracss %}
+{% block breadcrumb %}
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-primary">
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'manageUsers' %}" class="text-dark">Users</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+  </ol>
+</nav> -->
+{% endblock breadcrumb %}
+{% block content %}
+
+<div class="container">
+    <h2 class="py-4 px-4">Add User</h2>
+    <div class = "container-fluid book-content mt-4">
+        <div class = "row bg-white ">
+            <div class = "col my-4 px-5">
+                {% if form.errors %}
+
+                {% endif %}
+                <form method="POST" action="" id="form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">User Type</label>
+                            <select class="form-select" id="role" name="role">
+                                <option value="none" selected disabled hidden>Select a Role</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="staff">Staff</option>
+                                <option value="ocs">OCS</option>
+                                <option value="adpd">ADPD</option>
+                                <option value="ao">AO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 8vh">
+                    </div>
+
+                    <div class ="row">
+                        <div class="row">
+                            <div class="col-4 pe-4 min-width-col">
+                                <div class="mb-3">
+                                    {{form.first_name | as_crispy_field}}
+                                </div>
+                                <div class="mb-3">
+                                    {{form.last_name | as_crispy_field}}
+                                </div>
+                                <div class="mb-3">
+                                    {{form.username| as_crispy_field}}
+                                </div>
+                            </div>
+
+                            <div class="col-4 pe-4 min-width-col">
+                                <div class="mb-3">
+                                    {{form.email | as_crispy_field}}
+                                </div>
+                                <div class="mb-3">
+                                    {{form.password1 | as_crispy_field}}
+                                </div>
+                                <div class="mb-3">
+                                    {{form.password2 | as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-4 pe-4 min-width-col">
+                                <div class="mb-3" id="college">
+                                    {{form.college | as_crispy_field}}
+                                </div>
+                                <div class="mb-3">
+                                  <div id="CAMP-div" style="display: none">
+                                      {{ form.dp_CAMP | as_crispy_field }}
+                                  </div>
+                                  <div id="CAS-div" style="display: none">
+                                      {{ form.dp_CAS | as_crispy_field }}
+                                  </div>
+                                  <div id="CD-div" style="display: none">
+                                      {{ form.dp_CD | as_crispy_field }}
+                                  </div>
+                                  {% comment %}
+                                  <div id="CN-div" style="display: none">
+                                      {{ form.dp_CN | as_crispy_field }}
+                                  </div>
+                                  {% endcomment %}
+                                  <div id="CP-div" style="display: none">
+                                      {{ form.dp_CP | as_crispy_field }}
+                                  </div>
+                                  <div id="CPH-div" style="display: none">
+                                      {{ form.dp_CPH | as_crispy_field }}
+                                  </div>
+                                  <div id="CM-div" style="display: none">
+                                      {{ form.dp_CM | as_crispy_field }}
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                    {{form.default_permissions | as_crispy_field}}
+                                </div>
+                                <div id="perms" style="margin-left: 2vw;">
+                                    <div class="mb-3">
+                                        {{form.can_book | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_approve | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_remark | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_manage_equipment | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_manage_facilities | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_manage_terms | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_upload_schedules | as_crispy_field}}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.can_view_bookings | as_crispy_field}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-3 ms-15">
+                            <div class="col col-sm-auto">
+                                <button class="btn btn-success" type="submit" id="submitBtn"><i class="fa-solid fa-floppy-disk mr-2"></i>Save User</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var disabled_dept = false;
+    hide_department_divs()
+    disable_perms()
+
+    if ($("#id_college").val()){
+        var col = $("#id_college").val()
+        activate_department_div(col)
+    }
+
+    function enable_perms(){
+        $("#id_can_book").attr("disabled", false);
+        $("#id_can_approve").attr("disabled", false);
+        $("#id_can_remark").attr("disabled", false);
+        $("#id_can_manage_equipment").attr("disabled", false);
+        $("#id_can_manage_facilities").attr("disabled", false);
+        $("#id_can_manage_terms").attr("disabled", false);
+        $("#id_can_upload_schedules").attr("disabled", false);
+        $("#id_can_view_bookings").attr("disabled", false);
+    }
+
+    function disable_perms(){
+        $("#id_can_book").attr("disabled", true);
+        $("#id_can_approve").attr("disabled", true);
+        $("#id_can_remark").attr("disabled", true);
+        $("#id_can_manage_equipment").attr("disabled", true);
+        $("#id_can_manage_facilities").attr("disabled", true);
+        $("#id_can_manage_terms").attr("disabled", true);
+        $("#id_can_upload_schedules").attr("disabled", true);
+        $("#id_can_view_bookings").attr("disabled", true);
+    }
+
+    function clear_perms(){
+        $("#id_can_book").prop("checked", false);
+        $("#id_can_approve").prop("checked", false);
+        $("#id_can_remark").prop("checked", false);
+        $("#id_can_manage_equipment").prop("checked", false);
+        $("#id_can_manage_facilities").prop("checked", false);
+        $("#id_can_manage_terms").prop("checked", false);
+        $("#id_can_upload_schedules").prop("checked", false);
+        $("#id_can_view_bookings").prop("checked", false);
+    }
+    function clear_departments(){
+        $("#id_dp_CAMP").val("")
+        $("#id_dp_CAS").val("")
+        $("#id_dp_CD").val("")
+        // $("#id_dp_CN").val("")
+        $("#id_dp_CP").val("")
+        $("#id_dp_CPH").val("")
+        $("#id_dp_CM").val("")
+    }
+    function hide_department_divs(){
+        $("#CAMP-div").hide()
+        $("#CAS-div").hide()
+        $("#CD-div").hide()
+        // $("#CN-div").hide()
+        $("#CP-div").hide()
+        $("#CPH-div").hide()
+        $("#CM-div").hide()
+    }
+    function activate_department_div(id){
+        if (disabled_dept){
+            return;
+        }
+        if (id !== ""){
+            switch(id){
+                case "1":
+                    $("#CAMP-div").show()
+                    break;
+                case "2":
+                    $("#CAS-div").show()
+                    break;
+                case "4":
+                    $("#CD-div").show()
+                    break;
+                // case "5":
+                //    $("#CN-div").show()
+                //    break;
+                case "6":
+                    $("#CP-div").show()
+                    break;
+                case "10":
+                    $("#CPH-div").show()
+                    break;
+                case "11":
+                    $("#CM-div").show()
+                    break;
+                default:
+                    hide_department_divs()
+                    break;
+            }
+        }
+    }
+
+    function add_default_perms(){
+        clear_perms()
+        const select = document.getElementById('role');
+        const option = select.options[select.selectedIndex].value;
+        if (option !== 'none') {
+            if (option === 'faculty' || option === 'staff'){
+                $("#id_can_book").prop('checked', true);
+            }
+            else if (option === 'ocs'){
+                $("#id_can_approve").prop('checked', true);
+                $("#id_can_upload_schedules").prop('checked', true);
+            }
+            else if (option === 'adpd'){
+                $("#id_can_approve").prop('checked', true);
+            }
+            else if (option === 'ao'){
+                $("#id_can_manage_equipment").prop('checked', true);
+                $("#id_can_manage_facilities").prop('checked', true);
+            }
+
+            // For all roles
+            $("#id_can_view_bookings").prop('checked', true);
+        }
+    }
+
+    $("#id_college").change(function(){
+        var col = $("#id_college").val()
+        clear_departments()
+        hide_department_divs()
+        activate_department_div(col)
+    })
+    $("#show").click(function(){
+        $("#f").show()
+    })
+    $("#role").change(function(){
+        add_default_perms()
+        const btn = document.getElementById('show');
+        // variables to control the display of forms
+        const select = document.getElementById('role');
+        const college = document.getElementById('college');
+        const dept = document.getElementById('dept');
+        const option = select.options[select.selectedIndex].value;
+        const form = document.getElementById('f');
+
+        // show form if role is not empty
+        if (option !== 'none') {
+            college.style.display = 'block';
+
+            if (option === 'faculty' || option === 'staff') {
+                // console.log(option)
+                clear_departments()
+                disabled_dept = false;
+                var col = $("#id_college").val()
+                activate_department_div(col)
+            } else {
+                disabled_dept = true;
+                clear_departments()
+                hide_department_divs()
+            }
+        }
+    })
+    $("#id_default_permissions").click(function(){
+        var show_perms = !($("#id_default_permissions").is(":checked"))
+        // console.log(show_perms)
+
+        if (show_perms){
+            enable_perms()
+        }
+        else {
+        //    console.log("hideplz")
+            clear_perms()
+            disable_perms()
+            add_default_perms()
+        }
+    })
+    $("#form").submit(function(event){
+        enable_perms()
+    })
+})
+</script>
+
+{% endblock extrascripts %}

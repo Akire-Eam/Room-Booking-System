@@ -1,0 +1,27 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ 'Import Equipment from CSV File' }}</h1>
+                <form method="post" enctype="multipart/form-data">
+                    CSV File:
+                    {% csrf_token %}
+                    {{ form.csv_file }}
+                    <button class="button" type="submit">{% trans 'Import' %}</button>
+                    <button class="button" onclick="window.location.href='{% url 'admin:UPM_equipment_changelist' %}';">{% trans 'Cancel' %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="row"><br></div>
+        <div class="row"><h2>Sample CSV Content:</h2></div>
+        <div class="row">Equipment Name</div>
+        <div class="row">smart tv</div>
+        <div class="row">air conditioner</div>
+        <div class="row"><h2>Notes:</h2></div>
+        <li>Header and field Equipment Name is required.</li>
+        <li>For equipment names with commas, enclose it with double quotation marks.</li>
+    </div>
+{% endblock %}

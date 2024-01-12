@@ -1,0 +1,57 @@
+﻿CLASS NUMBER,COURSE TITLE,SUBJECT,"CATALOG
+ NO.",SECTION,COMPONENT,MEETING SCHEDULE,ROOM ASSIGNMENT,INSTRUCTOR,"CLASS 
+CAPACITY",RESTRICTIONS,EMAIL
+16875,"Special Topic: Evidence-based Practice for OT, PT, and SP",OPST,198,OT3F,LEC,02:00 PM - 04:00 PM T,Room 301 (OT Lecture Room),ACUÑA,30,,mpacuna@up.edu.ph 
+16870,Foundations of Research Literacy I,OPST,195,OT2D,LEC,08:00 AM - 10:00 AM F,Classroom 502,CABATAN,29,,mdcabatan@up.edu.ph 
+16873,"Leadership, Management & Entrepreneurship in Occupational Therapy, Physical Therapy and Speech Pathology",OPST,127,OTL,LAB,10:00 AM - 12:00 PM T,Room 302-303 (OPST Lecture Room),"CHEOC, ZOTOMAYOR",30,,"ducheoc@up.edu.ph , mdzotomayor@up.edu.ph "
+1956,Introduction to OT,OT,100,OT1A,LEC,02:00 PM - 05:00 PM W,Room 301 (OT Lecture Room),ACUÑA,30,,mpacuna@up.edu.ph 
+1960,Lifespan Dev't and Occupation I,OT,120,OT1C,LEC,01:30 PM - 03:00 PM TH,Room 301 (OT Lecture Room),RABACCA,30,,gdrabacca@up.edu.ph 
+1961,Lifespan Dev't and Occupation I,OT,120,L120,LAB,03:00 PM - 05:00 PM TH,Room 301 (OT Lecture Room),RABACCA,30,,gdrabacca@up.edu.ph 
+1958,Anatomy for OT,OT,102,OT1B,LEC,10:00 AM - 11:30 AM T,Room 301 (OT Lecture Room),RIVERA,30,,kvrivera2@up.edu.ph 
+1958,Anatomy for OT,OT,102,OT1B,LEC,08:30 AM - 10:00 AM TH,Room 301 (OT Lecture Room),RIVERA,30,,kvrivera2@up.edu.ph 
+1957,Anatomy for OT,OT,102,L102,LAB,10:00 AM - 12:00 PM TH,Room 302-303 (OPST Lecture Room),RIVERA,30,,kvrivera2@up.edu.ph 
+1962,Physiology for Health Related Sciences,PHYSIOL,21,OT1D,LEC,09:00 AM - 12:00 PM M,Room 201 (SP Lecture Room),CABATAN,30,,mdcabatan@up.edu.ph 
+16834,Introduction to Pathology for Occupational Therapists,OT,105,OT2A,LEC,10:00 AM - 12:00 PM TH,Room 301 (OT Lecture Room),CHEOC,30,,ducheoc@up.edu.ph 
+16836,Introduction to OT Process,OT,123,OT2B,LEC,10:00 AM - 12:00 PM M,Room 302-303 (OPST Lecture Room),RIVERA,29,,kvrivera2@up.edu.ph 
+16835,Introduction to OT Process,OT,123,L123,LAB,02:00 PM - 05:00 PM M,Room 302-303 (OPST Lecture Room),RIVERA,29,,kvrivera2@up.edu.ph 
+16838,Occupational Therapy Skills I,OT,124,OT2C,LEC,10:00 AM - 12:00 PM W,Room 404-405 (OT Laboratory Room),VILLARIDO,29,,jsvillarido2@up.edu.ph 
+16837,Occupational Therapy Skills I,OT,124,L124,LAB,02:00 PM - 05:00 PM W,Room 404-405 (OT Laboratory Room),VILLARIDO,29,,jsvillarido2@up.edu.ph 
+16841,Assessment of Person Factors for Occupational Performance in Adults (motor and sensory functions),OT,172,OT3A,LEC,10:30 AM - 12:00 PM TH,Room 404-405 (OT Laboratory Room),CHING,30,,peching@up.edu.ph 
+16840,Assessment of Person Factors for Occupational Performance in Adults (motor and sensory functions),OT,172,L172,LAB,02:00 PM - 05:00 PM TH,Room 404-405 (OT Laboratory Room),CHING,30,,peching@up.edu.ph 
+16861,Assessment of Occupations in Contexts,OT,178,L178,LAB,02:00 PM - 05:00 PM M,Room 301 (OT Lecture Room),RABACCA,30,,gdrabacca@up.edu.ph 
+16860,Assessment of Occupations in Contexts,OT,178,OT3D,LEC,10:00 AM - 12:00 PM M,Room 301 (OT Lecture Room),RABACCA,30,,gdrabacca@up.edu.ph 
+16855,Assessment of Person Factors for Occupational Performance in Adults (process and social interaction skills),OT,174,L174,LAB,02:00 PM - 05:00 PM W,Classroom 502,RODEROS,31,,kmroderos@up.edu.ph 
+16856,Assessment of Person Factors for Occupational Performance in Adults (process and social interaction skills),OT,174,OT3B,LEC,10:30 AM - 12:00 PM W,Classroom 502,RODEROS,31,,kmroderos@up.edu.ph 
+16857,"Assessment of Person Factors for Occupational Performance in Infants, Children, and Adolescents",OT,176,L176,LAB,02:00 PM - 05:00 PM F,Room 404-405 (OT Laboratory Room),VILLARIDO,31,,jsvillarido2@up.edu.ph 
+16858,"Assessment of Person Factors for Occupational Performance in Infants, Children, and Adolescents",OT,176,OT3C,LEC,10:30 AM - 12:00 PM F,Room 404-405 (OT Laboratory Room),VILLARIDO,31,,jsvillarido2@up.edu.ph 
+16868,Undergraduate Thesis,OT,200,OT4C,THE,01:00 PM - 05:00 PM F,Room 302-303 (OPST Lecture Room),CABATAN,28,,mdcabatan@up.edu.ph 
+1965,Movement Physiology,PT,104,L104,LAB,01:30 PM - 03:30 PM M,Room 401-402 (PT Laboratory Room 2),OLEGARIO,37,,cdolegario@up.edu.ph 
+1966,Movement Physiology,PT,104,PT1B,LEC,09:00 AM - 12:00 PM M,Room 401-402 (PT Laboratory Room 2),OLEGARIO,37,,cdolegario@up.edu.ph 
+1964,Human Anatomy for Physical Therapy,PT,102,PT1A,LEC,09:00 AM - 12:00 PM TH,Room 403 (PT Lecture Room),GORGON,37,,mrgorgon@up.edu.ph 
+1963,Human Anatomy for Physical Therapy,PT,102,L102,LAB,01:00 PM - 03:00 PM W,Room 302-303 (OPST Lecture Room),GORGON,37,,mrgorgon@up.edu.ph 
+1967,"Foundations of Physical Therapy Practice: Overview, Theories and Frameworks",PT,140,PT1C,LEC,03:00 PM - 05:00 PM W,Room 302-303 (OPST Lecture Room),Palad,37,,yypalad@up.edu.ph 
+16876,Movement Dysfunction and Disability,PT,105,PT2A,LEC,09:00 AM - 12:00 PM M,Room 403 (PT Lecture Room),Cayco,27,,cscayco1@up.edu.ph 
+16877,Professional Behaviors and Therapeutic Relationships in Physical Therapy,PT,111,PT2B,LEC,01:00 PM - 04:00 PM W,Classroom 505,Cayco,27,,cscayco1@up.edu.ph 
+16879,Foundations of Physical Therapy Practice: Assessment,PT,141,PT2C,LEC,08:00 AM - 10:00 AM W,Classroom 502,PEREZ,27,,caperez2@up.edu.ph 
+16878,Foundations of Physical Therapy Practice: Assessment,PT,141,L141,LAB,08:00 AM - 12:00 PM TH,Room 401-402 (PT Laboratory Room 2),Reyes,26,,pgreyes2@up.edu.ph 
+16887,"Leadership, Management & Entrepreneurship in Occupational Therapy, Physical Therapy and Speech Pathology",OPST,127,"PT2D, OT3E",LEC,08:00 AM - 10:00 AM T,Room 302-303 (OPST Lecture Room),"Mendoza, CHEOC",30,,"kgmendoza1@up.edu.ph, ducheoc@up.edu.ph "
+16884,Foundations of Research Literacy 2,OPST,196,"PT2E, SP2G",LEC,01:00 PM - 03:00 PM F,Room 201 (SP Lecture Room),"Bandong, Valdez",30,,"ajbandong@up.edu.ph, mcvaldez1@up.edu.ph "
+16883,Foundations of Research Literacy 2,OPST,196,"LPT, LAB",LAB,03:00 PM - 05:00 PM F,Room 201 (SP Lecture Room),"Bandong, Valdez",28,,"ajbandong@up.edu.ph, mcvaldez1@up.edu.ph "
+16889,Research Proposal Writing,OPST,197,PT4B,LEC,01:00 PM - 01:30 PM F,Room 301 (OT Lecture Room),Palad,28,,yypalad@up.edu.ph 
+16888,Research Proposal Writing,OPST,197,LPT,LAB,01:30 PM - 04:30 PM F,Room 301 (OT Lecture Room),Palad,28,,yypalad@up.edu.ph 
+1935,Civic Welfare and Training Service,CWTS,1,BSPT,LEC,09:00 AM - 12:00 PM W,Room 301 (OT Lecture Room),TABLANTE,37,,grtablante@up.edu.ph 
+16988,"Ethics for OT, PT and SP",OPST,136,SP2F,LEC,04:00 PM - 05:00 PM TH,Room 202-203 (Audio Visual Room),Marzan,31,,jbmarzan@up.edu.ph 
+16986,"Health Promotion and Disability Prevention in Occupational Therapy, Physical Therapy, and Speech Pathology",OPST,134,SP2E,LEC,01:00 PM - 05:00 PM M,Room 201 (SP Lecture Room),CHUA,32,,ekchua@up.edu.ph 
+16996,Research Proposal Writing,OPST,197,SP3F,LEC,01:00 PM - 04:30 PM W,Room 202-203 (Audio Visual Room),CHUA,31,,ekchua@up.edu.ph 
+1912,Introduction to Speech Pathology,SP,100,SP1A,LEC,01:00 PM - 04:30 PM W,Room 201 (SP Lecture Room),Zarraga,32,,ejzarraga@up.edu.ph 
+1920,Lifespan Development for Speech Pathology,SP,126,SP1B,LEC,01:00 PM - 06:00 PM M,Room 202-203 (Audio Visual Room),Bentulan,33,,rkbentulan@up.edu.ph 
+1926,Language and Cognitive Functioning,SP,136,SP1C,LEC,01:00 PM - 05:00 PM T,Room 202-203 (Audio Visual Room),Marzan,33,,jbmarzan@up.edu.ph 
+16951,Speech Function and Development,SP,134,SP2C,LEC,12:30 PM - 04:00 PM TH,Room 202-203 (Audio Visual Room),Valdez,24,,mcvaldez1@up.edu.ph 
+16952,Swallowing Development and Function,SP,138,SP2D,LEC,02:30 PM - 04:30 PM T,Room 201 (SP Lecture Room),AUSTRIA,24,,bdaustria@up.edu.ph 
+16908,Sensory-Perceptual Processing for Communication,SP,132,SP2A,LEC,10:30 AM - 01:30 PM T,Room 201 (SP Lecture Room),Quiros,24,,tlquiros1@up.edu.ph 
+16948,Speech Science,SP,133,SP2B,LEC,08:30 AM - 12:00 PM W,Room 201 (SP Lecture Room),ALBERT,23,,hdalbert@up.edu.ph 
+16964,Teaching in Speech Pathology,SP,130,SP3A,LEC,09:30 AM - 12:00 PM M,Classroom 504,Bentulan,30,,rkbentulan@up.edu.ph 
+16966,SP Assessment and Management of Hearing Loss,SP,142,SP3B,LEC,09:30 AM - 12:00 PM TH,Room 202-203 (Audio Visual Room),CATANGAY- OMBAO,31,,jvcatangay@up.edu.ph 
+16968,Assessment and Management of Speech Sound Conditions,SP,143,SP3C,LEC,08:00 AM - 12:00 PM W,Room 202-203 (Audio Visual Room),Bentulan,31,,rkbentulan@up.edu.ph 
+16970,Assessment and Management of Voice,SP,144,SP3D,LEC,01:00 PM - 03:30 PM T,Room 302-303 (OPST Lecture Room),Ligot,31,,fcligot@up.edu.ph 
+16971,Assessment and Management of Developmental Language Conditions,SP,146,SP3E,LEC,08:00 AM - 12:00 PM T,Room 202-203 (Audio Visual Room),AUSTRIA,32,,bdaustria@up.edu.ph 

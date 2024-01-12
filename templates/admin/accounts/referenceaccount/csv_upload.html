@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ 'Import Rooms from CSV File' }}</h1>
+                <form method="post" enctype="multipart/form-data">
+                    CSV File:
+                    {% csrf_token %}
+                    {{ form.csv }}
+                    <button class="button" type="submit">{% trans 'Import' %}</button>
+                    <button class="button" onclick="window.location.href='{% url 'admin:accounts_referenceaccount_changelist' %}';">{% trans 'Cancel' %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="row"><br></div>
+        <div class="row"><h2>Sample CSV Content:</h2></div>
+        <table>
+          <tr>
+            <th>HRIS_NUMBER</th>
+            <th>LASTNAME</th>
+            <th>FIRSTNAME</th>
+            <th>MIDDLE NAME</th>
+            <th>EMAIL_ADDRESS</th>
+            <th>CLASS</th>
+            <th>DEPARTMENT</th>
+            <th>College</th>
+            <th>STATUS</th>
+          </tr>
+          <tr>
+            <td>123456789</td>
+            <td>Dela Cruz</td>
+            <td>Juan</td>
+            <td>Tamad</td>
+            <td>juantdelacruz@up.edu.ph</td>
+            <td>Academic.Faculty</td>
+            <td>Department of Physical Sciences and Mathematics</td>
+            <td>College of Arts and Sciences</td>
+            <td>Active Assignment</td>
+          </tr>
+          <tr>
+            <td>987654321</td>
+            <td>Smith</td>
+            <td>John</td>
+            <td>Smite</td>
+            <td>johnsmite@up.edu.ph</td>
+            <td>Academic.Faculty</td>
+            <td>Department of Basic Dental Health Sciences</td>
+            <td>College of Dentistry</td>
+            <td>Active Assignment</td>
+          </tr>
+        </table>
+    </div>
+{% endblock %}

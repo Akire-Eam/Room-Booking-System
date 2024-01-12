@@ -1,0 +1,526 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Manage Users{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+  #content{
+    background-color: #f5ece1 !important;
+  }
+  .containerAdmin {
+    background-color: #f5ece1;
+  }
+  .main-title {
+    text-align: center; 
+    font-size: 6vw; 
+}
+
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 100px;
+    color: #412F26;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin-bottom: -15px;
+}
+  .bg-white {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    margin-bottom: 20px;
+  }
+
+  #dropdown {
+    margin-left: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .pagination a {
+    margin: 0 5px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .table tbody tr:hover {
+  background-color: rgb(126, 1, 1, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .container-xxl {
+    max-width: 100vw; /* Set the maximum width to the width of the viewport */
+    overflow-x: auto; /* Hide horizontal overflow if content extends beyond the viewport width */
+    text-align: center;
+}
+
+  /* Table */
+.table{
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border-radius: 5px !important;
+  margin-top: 20px;
+  overflow-x: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table thead{
+  background-color: #470606;
+  text-align: center;
+  height: 20%;
+  font-family: Helvetica, sans-serif;
+  color: white;
+  text-transform: uppercase;
+  font-weight: normal !important;
+  vertical-align: middle;
+}
+
+.table td{
+  vertical-align: middle;
+}
+
+  .container-fluid {
+  max-width: 100%;
+}
+
+
+.iconContainer1{
+  background-color: #6A6F4C;
+  border-radius: 5px; 
+  text-align: center; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  width: max-content;
+  padding: 10px;
+  height: 35px;
+  margin-top: 20px;
+  color: white;
+  font-family: Helvetica, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+  .iconContainer2{
+    background-color: white;
+    border-radius: 5px; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 35px;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    color: black;
+    font-family: Helvetica, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-select{
+    top: 0px;
+    max-width: 300px;
+  }
+
+  .records-per-page-label {
+      margin-top: 7px;
+      margin-right: 10px;
+      font-weight: normal;
+      font-family: Helvetica, sans-serif;
+  }
+
+  #filter-label{
+    font-size: x-small;
+    text-transform: uppercase;
+  }
+
+  #addUser{
+    background-color: #6A6F4C;
+    border-radius: 5px; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 35px;
+    margin-top: 20px;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: medium;
+  }
+
+  #addUser:hover{
+    background-color: #806044;
+    border-color: #806044;
+  }
+
+  /* Pagination */
+/* Default styling for larger screens */
+.pagination-container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pagination-container a,
+.pagination-container span {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #480d0b;
+    font-weight: bold;
+    background-color: white;
+    font-size: small; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   
+}
+
+.pagination-container span {
+    margin: 0 5px;
+}
+
+/* Media query for smaller screens (e.g., mobile devices) */
+@media screen and (max-width: 767px) {
+    .pagination-container a,
+    .pagination-container span {
+        padding: 6px 10px; /* Adjust padding for smaller screens */
+        font-size: smaller; /* Adjust font size for smaller screens */
+    }
+}
+
+
+/* Modal */
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+}
+
+.modal-header {
+    background-color: #480d0b;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    align-items: center; /* Center vertically */
+}
+
+.modal-title {
+    text-transform: none;
+    font-family: Helvetica, sans-serif;
+    margin: 0; /* Remove default margin */
+}
+
+
+.modal-body {
+    background-color: white;
+    color: #2F2427;
+    display: flex;
+    overflow-wrap: break-word; 
+    overflow-y: auto;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Helvetica, sans-serif;
+}
+
+.modal-body p {
+    margin: 0; /* Remove default margin for the paragraph */
+    white-space: pre-line;
+}
+
+.modal-footer {
+    background-color: white;
+    border-bottom: none;
+}
+
+.modal-footer .btn-danger {
+    background-color: #6A6F4C;
+    border-color: #6A6F4C;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+}
+
+.modal-footer .btn-secondary{
+    background-color: #8e8282;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+}
+
+.modal-footer .btn-warning{
+    background-color: #480d0b;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+}
+
+.modal-footer .btn-danger:hover,
+.modal-footer .btn-secondary:hover,
+.modal-footer .btn-warning:hover  {
+    background-color: #806044;
+    border-color: #806044;;
+}
+
+#editUser{
+  background-color: #6A6F4C;
+}
+
+#changePass:hover, #editUser:hover, #deleteUser:hover{
+  background-color: #806044;
+  border-color:#806044;
+}
+
+#deleteUser{
+  background-color: #480d0b;
+}
+
+.min-width-col {
+        min-width: 230px; /* Adjust this value as needed */
+        /* max-width: max-content; */
+}
+
+.container-xxl {
+  max-height: fit-content;
+    overflow: hidden; /* Hide horizontal overflow if content extends beyond the viewport width */
+  }
+
+  #id-div-rooms {
+  overflow-y: hidden;
+  overflow-x: auto;
+  max-width: 100%;
+  margin-top: -10px;
+  display: flex;
+  text-align: center;
+  /* justify-content: center; */
+  padding: 1px;
+}
+
+@media (max-width: 767px) {
+        .modal-content {
+            width: 90%; 
+        }
+
+        .modal-dialog {
+            justify-content: center;
+            align-content: center;
+            margin: auto;
+            }
+    }
+
+    .btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    /* color: #000; */
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%23fff"><path d="M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z"/></svg>') center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: .5;
+}
+</style>
+{% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <!-- <ol class="breadcrumb bg-primary">
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Users</li>
+  </ol> -->
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<!--Modals-->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+<div class="containerAdmin" style="display: block;">
+  <div class="container-xxl pb-2">
+    <div class="main-title">
+      <h1 style="font-size: 1.5em; letter-spacing: 0.8px; margin: 10px;">Users</h1>
+    </div>
+
+    <div class="row" style="margin-bottom: 30px;">
+      <div class="col-md-1"></div>
+
+      <div class="col-md-5 min-width-col">
+        <button class='btn btn-warning' role='button' id="addUser" onclick="location.href='{% url 'AddUserPage' %}'">
+          <i class="fa-regular fa-square-plus mr-2"></i>Add User
+        </button>
+      </div>
+
+      <div class="col-md-3 min-width-col">
+        <form style="text-align: center;" class="iconContainer1" id="paginationForm">
+          <label for="dropdown" class="records-per-page-label">Records per Page:</label>
+          <input type="hidden" name="page" value="{{ request.GET.page }}">
+          <select name="dropdown" id="paginator">
+            <option value=""></option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="col-md-2 min-width-col">
+        <form method="POST" action="" id="filterForm">
+          {% csrf_token %}
+          <label for="role" id="filter-label">User Type:</label>
+          <select class="form-select iconContainer2" id="role" name="role">
+            <option value=""></option>
+            <option value="all">All Users</option>
+            <option value="faculty">Faculty</option>
+            <option value="staff">Staff</option>
+            <option value="ocs">OCS</option>
+            <option value="adpd">ADPD</option>
+            <option value="ao">AO</option>
+          </select>
+        </form>
+      </div>
+    </div>
+
+    <div id="id-div-rooms" class = "col-sm-12 h-100" style="font-family: Helvetica, sans-serif;">
+      {% include "accounts/user-table.html" %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      {% if users.has_previous %}
+        <a href="?page=1&dropdown={{records}}">&laquo; FIRST</a>
+        <a href="?page={{users.previous_page_number}}&dropdown={{records}}">PREV</a>
+      {% endif %}
+
+      <span>{{users.number}} OF {{users.paginator.num_pages}}</span>
+
+      {% if users.has_next %}
+        <a href="?page={{users.next_page_number}}&dropdown={{records}}">NEXT</a>
+        <a href="?page={{users.paginator.num_pages}}&dropdown={{records}}">LAST &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+$(function() {
+  var asyncSuccessMessageUpdate = [
+    "<div ",
+    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+    "Success: User was updated.",
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+    "<span aria-hidden='true'>&times;</span>",
+    "</button>",
+    "</div>",
+    "<script>",
+    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+    "<\/script>"
+  ].join("");
+
+  function deleteUserModalForm() {
+    $(".delete").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+    });
+  }
+  deleteUserModalForm();
+
+  function updateUserModalForm() {
+
+    $(".update").each(function () {
+
+      $(this).modalForm({
+        formURL: $(this).data("form-url"),
+        asyncUpdate: true,
+        asyncSettings: {
+          closeOnSubmit: false,
+          successMessage: asyncSuccessMessageUpdate,
+          dataUrl: "users/",
+          dataElementId: "#user-table",
+          dataKey: "table",
+          addModalFormFunction: reinstantiateModalForms
+        }
+      });
+    });
+  }
+  updateUserModalForm();
+
+  var asyncSuccessMessageChange = [
+    "<div ",
+    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+    "Success: Password was changed.",
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+    "<span aria-hidden='true'>&times;</span>",
+    "</button>",
+    "</div>",
+    "<script>",
+    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+    "<\/script>"
+  ].join("");
+
+
+  function updateUserPassModalForm() {
+
+    $('.pass').each(function () {
+      $(this).modalForm({
+        formURL: $(this).data("form-url"),
+        asyncUpdate: true,
+        asyncSettings: {
+          closeOnSubmit: false,
+          successMessage: asyncSuccessMessageUpdate,
+          dataUrl: "users/",
+          dataElementId: "#user-table",
+          dataKey: "table",
+          addModalFormFunction: reinstantiateModalForms
+        }
+      });
+    });
+
+  }
+  updateUserPassModalForm();
+
+  function reinstantiateModalForms(){
+    updateUserModalForm();
+    deleteUserModalForm();
+    updateUserPassModalForm();
+  }
+})
+$('#paginator').change(function() {
+        // Trigger the form submission when the value changes
+        $('#paginationForm').submit();
+});
+
+$(document).ready(function() {
+    $('#role').on('change', function() {
+        var selectedRole = $(this).val();
+        if (selectedRole === "all") {
+            // Handle the case when "All User Types" is selected
+            console.log("Displaying all user types");
+            // Add your logic here to display all users or clear filters
+        } else {
+            // Perform filter action for the selected user type
+            console.log("Selected Role:", selectedRole);
+        }
+        // Automatically submit the form on select change
+        $('#filterForm').submit();
+    });
+});
+
+$('#filterForm').submit(() => {
+    sessionStorage.removeItem('filters');
+});
+</script>
+{% endblock extrascripts %}
